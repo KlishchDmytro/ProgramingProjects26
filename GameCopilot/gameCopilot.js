@@ -17,8 +17,8 @@ document.getElementById("startGame").addEventListener("click", () => {
   accounts.b = parseInt(document.getElementById("accountB").value);
   accounts.c = parseInt(document.getElementById("accountC").value);
 
-  document.getElementById("gameState").innerText =
-    `Game started! ${player} vs ${partner}. Accounts: A=${accounts.a}, B=${accounts.b}, C=${accounts.c}`;
+   document.getElementById("gameState").innerText =
+     `Game started! ${player} vs ${partner}. Accounts: A=${accounts.a}, B=${accounts.b}, C=${accounts.c}`;
 });
 
 // Make Turn
@@ -47,23 +47,23 @@ document.getElementById("makeTurn").addEventListener("click", () => {
 // Random bot move
 function randomMove() {
   let keys = ["a", "b", "c"];
-  let choice = keys[Math.floor(Math.random() * 3)];
-  if (accounts[choice] > 0) accounts[choice]--;
+   let choice = keys[Math.floor(Math.random() * 3)];
+    if (accounts[choice] > 0) accounts[choice]--;
 }
 
 // Smart bot move
 function smartMove(withMistake) {
   let xorSum = equilibrium(accounts.a, accounts.b, accounts.c);
-  if (xorSum === 0 || withMistake) {
-    randomMove(); // mistake or no winning move
+   if (xorSum === 0 || withMistake) {
+     randomMove(); // mistake or no winning move
   } else {
     // Find account to adjust
     for (let key of ["a", "b", "c"]) {
       let target = accounts[key] ^ xorSum;
-      if (target < accounts[key]) {
-        accounts[key] = target;
-        return;
-      }
+       if (target < accounts[key]) {
+         accounts[key] = target;
+         return;
+       }
     }
     randomMove(); // fallback
   }
